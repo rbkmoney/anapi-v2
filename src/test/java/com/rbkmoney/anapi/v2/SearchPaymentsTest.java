@@ -72,7 +72,7 @@ class SearchPaymentsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchPayments(any())).thenReturn(MagistaUtil.createSearchPaymentRequiredResponse());
-        mvc.perform(get("/payments")
+        mvc.perform(get("/lk/v2/payments")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -95,7 +95,7 @@ class SearchPaymentsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchPayments(any())).thenReturn(MagistaUtil.createSearchPaymentAllResponse());
-        mvc.perform(get("/payments")
+        mvc.perform(get("/lk/v2/payments")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -116,7 +116,7 @@ class SearchPaymentsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
     void searchPaymentsRequestInvalid() {
         MultiValueMap<String, String> params = OpenApiUtil.getSearchRequiredParams();
         params.remove("partyID");
-        mvc.perform(get("/payments")
+        mvc.perform(get("/lk/v2/payments")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -136,7 +136,7 @@ class SearchPaymentsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchPayments(any())).thenThrow(TException.class);
-        mvc.perform(get("/payments")
+        mvc.perform(get("/lk/v2/payments")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())

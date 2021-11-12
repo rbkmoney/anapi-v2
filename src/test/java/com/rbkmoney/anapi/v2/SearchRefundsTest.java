@@ -71,7 +71,7 @@ class SearchRefundsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchRefunds(any())).thenReturn(MagistaUtil.createSearchRefundRequiredResponse());
-        mvc.perform(get("/refunds")
+        mvc.perform(get("/lk/v2/refunds")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -94,7 +94,7 @@ class SearchRefundsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchRefunds(any())).thenReturn(MagistaUtil.createSearchRefundAllResponse());
-        mvc.perform(get("/refunds")
+        mvc.perform(get("/lk/v2/refunds")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -115,7 +115,7 @@ class SearchRefundsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
     void searchRefundsRequestInvalid() {
         MultiValueMap<String, String> params = OpenApiUtil.getSearchRequiredParams();
         params.remove("partyID");
-        mvc.perform(get("/refunds")
+        mvc.perform(get("/lk/v2/refunds")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -135,7 +135,7 @@ class SearchRefundsTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchRefunds(any())).thenThrow(TException.class);
-        mvc.perform(get("/refunds")
+        mvc.perform(get("/lk/v2/refunds")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())

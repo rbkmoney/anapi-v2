@@ -67,7 +67,7 @@ class ErrorControllerTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         params.set("limit", "1001");
 
         mockMvc.perform(
-                        get("/payments")
+                        get("/lk/v2/payments")
                                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                                 .header("X-Request-ID", randomUUID())
                         .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -94,7 +94,7 @@ class ErrorControllerTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         MultiValueMap<String, String> params = OpenApiUtil.getSearchRequiredParams();
 
         mockMvc.perform(
-                        get("/refunds")
+                get("/lk/v2/refunds")
                                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                                 .header("X-Request-ID", randomUUID())
                                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -121,7 +121,7 @@ class ErrorControllerTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         params.remove("limit");
 
         mockMvc.perform(
-                get("/refunds")
+                get("/lk/v2/refunds")
                         .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                         .header("X-Request-ID", randomUUID())
                         .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -137,7 +137,7 @@ class ErrorControllerTest extends AbstractKeycloakOpenIdAsWiremockConfig {
     @Test
     void testDeadlineException() throws Exception {
         mockMvc.perform(
-                get("/refunds")
+                get("/lk/v2/refunds")
                         .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                         .header("X-Request-ID", randomUUID())
                         .header("X-Request-Deadline", "fail")
@@ -163,7 +163,7 @@ class ErrorControllerTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         MultiValueMap<String, String> params = OpenApiUtil.getSearchRequiredParams();
 
         mockMvc.perform(
-                        get("/refunds")
+                get("/lk/v2/refunds")
                                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                                 .header("X-Request-ID", randomUUID())
                                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -185,7 +185,7 @@ class ErrorControllerTest extends AbstractKeycloakOpenIdAsWiremockConfig {
     @Test
     void testUnauthorizedException() throws Exception {
         mockMvc.perform(
-                get("/refunds")
+                get("/lk/v2/refunds")
                         .header("X-Request-ID", randomUUID())
                         .header("X-Request-Deadline", "fail")
                         .params(OpenApiUtil.getSearchRequiredParams())

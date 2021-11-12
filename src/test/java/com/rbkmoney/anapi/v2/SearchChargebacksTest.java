@@ -72,13 +72,13 @@ class SearchChargebacksTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchChargebacks(any())).thenReturn(MagistaUtil.createSearchChargebackRequiredResponse());
-        mvc.perform(get("/chargebacks")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(OpenApiUtil.getSearchRequiredParams())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/chargebacks")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(OpenApiUtil.getSearchRequiredParams())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$").exists());
@@ -95,13 +95,13 @@ class SearchChargebacksTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchChargebacks(any())).thenReturn(MagistaUtil.createSearchChargebackAllResponse());
-        mvc.perform(get("/chargebacks")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(OpenApiUtil.getSearchChargebackAllParams())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/chargebacks")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(OpenApiUtil.getSearchChargebackAllParams())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$").exists());
@@ -116,7 +116,7 @@ class SearchChargebacksTest extends AbstractKeycloakOpenIdAsWiremockConfig {
     void searchChargebacksRequestInvalid() {
         MultiValueMap<String, String> params = OpenApiUtil.getSearchRequiredParams();
         params.remove("partyID");
-        mvc.perform(get("/chargebacks")
+        mvc.perform(get("/lk/v2/chargebacks")
                 .header("Authorization", "Bearer " + generateInvoicesReadJwt())
                 .header("X-Request-ID", randomUUID())
                 .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
@@ -136,13 +136,13 @@ class SearchChargebacksTest extends AbstractKeycloakOpenIdAsWiremockConfig {
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchPayments(any())).thenThrow(TException.class);
-        mvc.perform(get("/chargebacks")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(OpenApiUtil.getSearchRequiredParams())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/chargebacks")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(OpenApiUtil.getSearchRequiredParams())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is5xxServerError());
         verify(vortigonClient, times(1)).getShopsIds(any(), any());

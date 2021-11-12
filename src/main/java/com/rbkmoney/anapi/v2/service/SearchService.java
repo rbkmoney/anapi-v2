@@ -22,9 +22,9 @@ public class SearchService {
     private final StatInvoiceTemplateToInvoiceTemplateConverter invoiceTemplateResponseConverter;
 
     @SneakyThrows
-    public InlineResponse20010 findPayments(PaymentSearchQuery query) {
+    public InlineResponse2009 searchPayments(PaymentSearchQuery query) {
         StatPaymentResponse magistaResponse = magistaClient.searchPayments(query);
-        return new InlineResponse20010()
+        return new InlineResponse2009()
                 .result(magistaResponse.getPayments().stream()
                         .map(paymentResponseConverter::convert)
                         .collect(Collectors.toList()))
@@ -32,9 +32,9 @@ public class SearchService {
     }
 
     @SneakyThrows
-    public InlineResponse2008 findChargebacks(ChargebackSearchQuery query) {
+    public InlineResponse20011 searchChargebacks(ChargebackSearchQuery query) {
         StatChargebackResponse magistaResponse = magistaClient.searchChargebacks(query);
-        return new InlineResponse2008()
+        return new InlineResponse20011()
                 .result(magistaResponse.getChargebacks().stream()
                         .map(chargebackResponseConverter::convert)
                         .collect(Collectors.toList()))
@@ -43,9 +43,9 @@ public class SearchService {
 
 
     @SneakyThrows
-    public InlineResponse2009 findInvoices(InvoiceSearchQuery query) {
+    public InlineResponse2008 searchInvoices(InvoiceSearchQuery query) {
         StatInvoiceResponse magistaResponse = magistaClient.searchInvoices(query);
-        return new InlineResponse2009()
+        return new InlineResponse2008()
                 .result(magistaResponse.getInvoices().stream()
                         .map(invoiceResponseConverter::convert)
                         .collect(Collectors.toList()))
@@ -53,9 +53,9 @@ public class SearchService {
     }
 
     @SneakyThrows
-    public InlineResponse20011 findPayouts(PayoutSearchQuery query) {
+    public InlineResponse20012 searchPayouts(PayoutSearchQuery query) {
         StatPayoutResponse magistaResponse = magistaClient.searchPayouts(query);
-        return new InlineResponse20011()
+        return new InlineResponse20012()
                 .result(magistaResponse.getPayouts().stream()
                         .map(payoutResponseConverter::convert)
                         .collect(Collectors.toList()))
@@ -63,9 +63,9 @@ public class SearchService {
     }
 
     @SneakyThrows
-    public InlineResponse20012 findRefunds(RefundSearchQuery query) {
+    public InlineResponse20010 searchRefunds(RefundSearchQuery query) {
         StatRefundResponse magistaResponse = magistaClient.searchRefunds(query);
-        return new InlineResponse20012()
+        return new InlineResponse20010()
                 .result(magistaResponse.getRefunds().stream()
                         .map(refundResponseConverter::convert)
                         .collect(Collectors.toList()))
@@ -73,7 +73,7 @@ public class SearchService {
     }
 
     @SneakyThrows
-    public InlineResponse20013 findInvoiceTemplates(InvoiceTemplateSearchQuery query) {
+    public InlineResponse20013 searchInvoiceTemplates(InvoiceTemplateSearchQuery query) {
         StatInvoiceTemplateResponse magistaResponse = magistaClient.searchInvoiceTemplates(query);
         return new InlineResponse20013()
                 .result(magistaResponse.getInvoiceTemplates().stream()

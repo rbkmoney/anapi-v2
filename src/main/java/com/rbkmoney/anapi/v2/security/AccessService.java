@@ -28,9 +28,15 @@ public class AccessService {
     @Value("${service.bouncer.auth.enabled}")
     private boolean authEnabled;
 
-    public List<String> getAccessibleShops(String operationId, String partyId, List<String> requestShopIds,
-                                           String realm) {
+    public List<String> getAccessibleShops(String operationId, String partyId, String realm) {
+        return getAccessibleShops(operationId, partyId, null, realm);
+    }
 
+    public List<String> getAccessibleShops(
+            String operationId,
+            String partyId,
+            List<String> requestShopIds,
+            String realm) {
         List<String> shopIds = vortigonService.getShopIds(partyId, Objects.requireNonNullElse(realm, "live"));
 
         if (requestShopIds != null && !requestShopIds.isEmpty()) {

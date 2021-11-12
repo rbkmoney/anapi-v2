@@ -72,13 +72,13 @@ class SearchInvoiceTemplatesTest extends AbstractKeycloakOpenIdAsWiremockConfig 
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchInvoiceTemplates(any())).thenReturn(
                 MagistaUtil.createSearchInvoiceTemplateRequiredResponse());
-        mvc.perform(get("/invoice-templates")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(OpenApiUtil.getSearchRequiredParams())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/invoice-templates")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(OpenApiUtil.getSearchRequiredParams())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$").exists());
@@ -96,13 +96,13 @@ class SearchInvoiceTemplatesTest extends AbstractKeycloakOpenIdAsWiremockConfig 
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchInvoiceTemplates(any())).thenReturn(
                 MagistaUtil.createSearchInvoiceTemplateAllResponse());
-        mvc.perform(get("/invoice-templates")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(OpenApiUtil.getSearchInvoiceAllParams())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/invoice-templates")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(OpenApiUtil.getSearchInvoiceAllParams())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$").exists());
@@ -117,13 +117,13 @@ class SearchInvoiceTemplatesTest extends AbstractKeycloakOpenIdAsWiremockConfig 
     void searchInvoiceTemplatesRequestInvalid() {
         MultiValueMap<String, String> params = OpenApiUtil.getSearchRequiredParams();
         params.remove("partyID");
-        mvc.perform(get("/invoice-templates")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(params)
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/invoice-templates")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(params)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.code").value(DefaultLogicError.CodeEnum.INVALIDREQUEST.getValue()))
@@ -137,13 +137,13 @@ class SearchInvoiceTemplatesTest extends AbstractKeycloakOpenIdAsWiremockConfig 
         when(orgMgmtClient.getUserContext(any())).thenReturn(createContextFragment());
         when(bouncerClient.judge(any(), any())).thenReturn(createJudgementAllowed());
         when(magistaClient.searchInvoiceTemplates(any())).thenThrow(TException.class);
-        mvc.perform(get("/invoice-templates")
-                        .header("Authorization", "Bearer " + generateInvoicesReadJwt())
-                        .header("X-Request-ID", randomUUID())
-                        .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
-                        .params(OpenApiUtil.getSearchRequiredParams())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(""))
+        mvc.perform(get("/lk/v2/invoice-templates")
+                .header("Authorization", "Bearer " + generateInvoicesReadJwt())
+                .header("X-Request-ID", randomUUID())
+                .header("X-Request-Deadline", Instant.now().plus(1, ChronoUnit.DAYS).toString())
+                .params(OpenApiUtil.getSearchRequiredParams())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(""))
                 .andDo(print())
                 .andExpect(status().is5xxServerError());
         verify(vortigonClient, times(1)).getShopsIds(any(), any());
