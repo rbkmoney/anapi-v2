@@ -109,7 +109,6 @@ public class OpenApiUtil {
         params.add("excludedShops", randomIntegerAsString(1, 10));
         params.add("excludedShops", randomIntegerAsString(11, 20));
         params.add("continuationToken", "test");
-
         return params;
     }
 
@@ -125,6 +124,22 @@ public class OpenApiUtil {
         params.add("excludedShops", randomIntegerAsString(1, 10));
         params.add("excludedShops", randomIntegerAsString(11, 20));
         params.add("continuationToken", "test");
+        return params;
+    }
+
+    public static MultiValueMap<String, String> getAnalyticsRequiredParams() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("partyID", randomIntegerAsString(1, 1000));
+        params.add("fromTime", "2007-12-03T10:15:30+01:00");
+        params.add("toTime", "2020-12-03T10:15:30+01:00");
+        return params;
+    }
+
+    public static MultiValueMap<String, String> getAnalyticsAllParams() {
+        MultiValueMap<String, String> params = getAnalyticsRequiredParams();
+        params.add("shopIDs", "{1,3}");
+        params.add("excludeShopIDs", "{2}");
+        params.add("paymentInstitutionRealm", PaymentInstitutionRealm.live.name());
         return params;
     }
 }
