@@ -1,6 +1,7 @@
 package com.rbkmoney.anapi.v2.security;
 
 import com.rbkmoney.anapi.v2.exception.AuthorizationException;
+import com.rbkmoney.anapi.v2.exception.BouncerException;
 import com.rbkmoney.anapi.v2.service.BouncerService;
 import com.rbkmoney.anapi.v2.service.KeycloakService;
 import com.rbkmoney.anapi.v2.service.VortigonService;
@@ -50,6 +51,7 @@ public class AccessService {
                     throw new AuthorizationException(String.format("No rights to perform %s", operationId));
                 } else {
                     log.warn("No rights to perform {}", operationId);
+                    return List.copyOf(shopIds);
                 }
             }
             case RESTRICTED: {
@@ -59,10 +61,14 @@ public class AccessService {
                             .collect(Collectors.toList());
                 } else {
                     log.warn("Rights to perform {} are restricted", operationId);
+                    return List.copyOf(shopIds);
                 }
             }
+            case ALLOWED:
+                return List.copyOf(shopIds);
+            default:
+                throw new BouncerException(String.format("Resolution %s cannot be processed", resolution));
         }
-        return List.copyOf(shopIds);
     }
 
     private AnapiBouncerContext buildAnapiBouncerContext(String operationId, String partyId, List<String> shopIds) {

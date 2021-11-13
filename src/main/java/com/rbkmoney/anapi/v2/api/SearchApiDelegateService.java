@@ -20,7 +20,7 @@ import static com.rbkmoney.anapi.v2.util.DeadlineUtil.checkDeadline;
 @PreAuthorize("hasAuthority('invoices:read')")
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings("ParameterName")
+@SuppressWarnings({"ParameterName", "LineLength"})
 public class SearchApiDelegateService implements SearchApiDelegate {
 
     private final MagistaService magistaService;
