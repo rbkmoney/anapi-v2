@@ -1,13 +1,13 @@
 package com.rbkmoney.anapi.v2.service;
 
+import com.rbkmoney.anapi.v2.exception.AnalytycsException;
+import com.rbkmoney.anapi.v2.model.OffsetAmount;
+import com.rbkmoney.anapi.v2.model.OffsetCount;
+import com.rbkmoney.anapi.v2.model.SplitUnit;
+import com.rbkmoney.anapi.v2.model.SubError;
+import com.rbkmoney.anapi.v2.model.*;
 import com.rbkmoney.damsel.analytics.*;
-import com.rbkmoney.openapi.anapi_v2.model.OffsetAmount;
-import com.rbkmoney.openapi.anapi_v2.model.OffsetCount;
-import com.rbkmoney.openapi.anapi_v2.model.SplitUnit;
-import com.rbkmoney.openapi.anapi_v2.model.SubError;
-import com.rbkmoney.openapi.anapi_v2.model.*;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
 
@@ -19,141 +19,177 @@ public class AnalyticsService {
 
     private final AnalyticsServiceSrv.Iface analyticsClient;
 
-    @SneakyThrows(TException.class)
     public InlineResponse2006 getPaymentsToolDistribution(FilterRequest filterRequest) {
-        var paymentsToolDistribution = analyticsClient.getPaymentsToolDistribution(filterRequest);
-        return new InlineResponse2006()
-                .result(paymentsToolDistribution.getPaymentToolsDistributions().stream()
-                        .map(o -> new PaymentsToolDistributionResult()
-                                .name(o.getName())
-                                .percents(o.getPercents()))
-                        .collect(Collectors.toList()));
+        try {
+            var distribution = analyticsClient.getPaymentsToolDistribution(filterRequest);
+            return new InlineResponse2006()
+                    .result(distribution.getPaymentToolsDistributions().stream()
+                            .map(o -> new PaymentsToolDistributionResult()
+                                    .name(o.getName())
+                                    .percents(o.getPercents()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsToolDistribution", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse200 getPaymentsAmount(FilterRequest filterRequest) {
-        var paymentsAmount = analyticsClient.getPaymentsAmount(filterRequest);
-        return new InlineResponse200()
-                .result(paymentsAmount.getGroupsAmount().stream()
-                        .map(o -> new AmountResult()
-                                .amount(o.getAmount())
-                                .currency(o.getCurrency()))
-                        .collect(Collectors.toList()));
+        try {
+            var paymentsAmount = analyticsClient.getPaymentsAmount(filterRequest);
+            return new InlineResponse200()
+                    .result(paymentsAmount.getGroupsAmount().stream()
+                            .map(o -> new AmountResult()
+                                    .amount(o.getAmount())
+                                    .currency(o.getCurrency()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsAmount", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse200 getCreditingsAmount(FilterRequest filterRequest) {
-        var creditingsAmount = analyticsClient.getCreditingsAmount(filterRequest);
-        return new InlineResponse200()
-                .result(creditingsAmount.getGroupsAmount().stream()
-                        .map(o -> new AmountResult()
-                                .amount(o.getAmount())
-                                .currency(o.getCurrency()))
-                        .collect(Collectors.toList()));
+        try {
+            var creditingsAmount = analyticsClient.getCreditingsAmount(filterRequest);
+            return new InlineResponse200()
+                    .result(creditingsAmount.getGroupsAmount().stream()
+                            .map(o -> new AmountResult()
+                                    .amount(o.getAmount())
+                                    .currency(o.getCurrency()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getCreditingsAmount", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse200 getAveragePayment(FilterRequest filterRequest) {
-        var averagePayment = analyticsClient.getAveragePayment(filterRequest);
-        return new InlineResponse200()
-                .result(averagePayment.getGroupsAmount().stream()
-                        .map(o -> new AmountResult()
-                                .amount(o.getAmount())
-                                .currency(o.getCurrency()))
-                        .collect(Collectors.toList()));
+        try {
+            var averagePayment = analyticsClient.getAveragePayment(filterRequest);
+            return new InlineResponse200()
+                    .result(averagePayment.getGroupsAmount().stream()
+                            .map(o -> new AmountResult()
+                                    .amount(o.getAmount())
+                                    .currency(o.getCurrency()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getAveragePayment", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse2001 getPaymentsCount(FilterRequest filterRequest) {
-        var paymentsCount = analyticsClient.getPaymentsCount(filterRequest);
-        return new InlineResponse2001()
-                .result(paymentsCount.getGroupsCount().stream()
-                        .map(o -> new CountResult()
-                                .count(o.getCount())
-                                .currency(o.getCurrency()))
-                        .collect(Collectors.toList()));
+        try {
+            var paymentsCount = analyticsClient.getPaymentsCount(filterRequest);
+            return new InlineResponse2001()
+                    .result(paymentsCount.getGroupsCount().stream()
+                            .map(o -> new CountResult()
+                                    .count(o.getCount())
+                                    .currency(o.getCurrency()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsCount", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse2002 getPaymentsErrorDistribution(FilterRequest filterRequest) {
-        var paymentsErrorDistribution = analyticsClient.getPaymentsErrorDistribution(filterRequest);
-        return new InlineResponse2002()
-                .result(paymentsErrorDistribution.getErrorDistributions().stream()
-                        .map(o -> new PaymentsErrorsDistributionResult()
-                                .error(o.getName())
-                                .percents(o.getPercents()))
-                        .collect(Collectors.toList()));
+        try {
+            var distribution = analyticsClient.getPaymentsErrorDistribution(filterRequest);
+            return new InlineResponse2002()
+                    .result(distribution.getErrorDistributions().stream()
+                            .map(o -> new PaymentsErrorsDistributionResult()
+                                    .error(o.getName())
+                                    .percents(o.getPercents()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsErrorDistribution", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse2005 getPaymentsSubErrorDistribution(FilterRequest filterRequest) {
-        var paymentsSubErrorDistribution = analyticsClient.getPaymentsSubErrorDistribution(filterRequest);
-        return new InlineResponse2005()
-                .result(paymentsSubErrorDistribution.getErrorDistributions().stream()
-                        .map(o -> new PaymentsSubErrorsDistributionResult()
-                                .error(getSubError(o.getError()))
-                                .percents(o.getPercents()))
-                        .collect(Collectors.toList()));
+        try {
+            var distribution = analyticsClient.getPaymentsSubErrorDistribution(filterRequest);
+            return new InlineResponse2005()
+                    .result(distribution.getErrorDistributions().stream()
+                            .map(o -> new PaymentsSubErrorsDistributionResult()
+                                    .error(getSubError(o.getError()))
+                                    .percents(o.getPercents()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsSubErrorDistribution", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse2003 getPaymentsSplitAmount(SplitFilterRequest splitFilterRequest) {
-        var paymentsSplitAmount = analyticsClient.getPaymentsSplitAmount(splitFilterRequest);
-        return new InlineResponse2003()
-                .result(paymentsSplitAmount.getGroupedCurrencyAmounts().stream()
-                        .map(o -> createSplitAmountResult(o, paymentsSplitAmount.getResultSplitUnit()))
-                        .collect(Collectors.toList()));
+        try {
+            var paymentsSplitAmount = analyticsClient.getPaymentsSplitAmount(splitFilterRequest);
+            return new InlineResponse2003()
+                    .result(paymentsSplitAmount.getGroupedCurrencyAmounts().stream()
+                            .map(o -> createSplitAmountResult(o, paymentsSplitAmount.getResultSplitUnit()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsSplitAmount", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse2004 getPaymentsSplitCount(SplitFilterRequest splitFilterRequest) {
-        var paymentsSplitCount = analyticsClient.getPaymentsSplitCount(splitFilterRequest);
-        return new InlineResponse2004()
-                .result(paymentsSplitCount.getPaymentToolsDestrobutions().stream()
-                        .map(o -> createSplitCountResult(o, paymentsSplitCount.getResultSplitUnit()))
-                        .collect(Collectors.toList()));
+        try {
+            var paymentsSplitCount = analyticsClient.getPaymentsSplitCount(splitFilterRequest);
+            return new InlineResponse2004()
+                    .result(paymentsSplitCount.getPaymentToolsDestrobutions().stream()
+                            .map(o -> createSplitCountResult(o, paymentsSplitCount.getResultSplitUnit()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getPaymentsSplitCount", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse200 getRefundsAmount(FilterRequest filterRequest) {
-        var refundsAmount = analyticsClient.getRefundsAmount(filterRequest);
-        return new InlineResponse200()
-                .result(refundsAmount.getGroupsAmount().stream()
-                        .map(o -> new AmountResult()
-                                .amount(o.getAmount())
-                                .currency(o.getCurrency()))
-                        .collect(Collectors.toList()));
+        try {
+            var refundsAmount = analyticsClient.getRefundsAmount(filterRequest);
+            return new InlineResponse200()
+                    .result(refundsAmount.getGroupsAmount().stream()
+                            .map(o -> new AmountResult()
+                                    .amount(o.getAmount())
+                                    .currency(o.getCurrency()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getRefundsAmount", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse200 getCurrentBalances(MerchantFilter merchantFilter) {
-        var refundsAmount = analyticsClient.getCurrentBalances(merchantFilter);
-        return new InlineResponse200()
-                .result(refundsAmount.getGroupsAmount().stream()
-                        .map(o -> new AmountResult()
-                                .amount(o.getAmount())
-                                .currency(o.getCurrency()))
-                        .collect(Collectors.toList()));
+        try {
+            var refundsAmount = analyticsClient.getCurrentBalances(merchantFilter);
+            return new InlineResponse200()
+                    .result(refundsAmount.getGroupsAmount().stream()
+                            .map(o -> new AmountResult()
+                                    .amount(o.getAmount())
+                                    .currency(o.getCurrency()))
+                            .collect(Collectors.toList()));
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getCurrentBalances", e);
+        }
     }
 
-    @SneakyThrows(TException.class)
     public InlineResponse2007 getCurrentShopBalances(MerchantFilter merchantFilter) {
-        var currentShopBalances = analyticsClient.getCurrentShopBalances(merchantFilter);
-        var shopAmountResults = currentShopBalances.getGroupsAmount().stream()
-                .collect(Collectors.groupingBy(
-                        ShopGroupedAmount::getShopId,
-                        Collectors.mapping(
-                                o -> new AmountResult()
-                                        .amount(o.getAmount())
-                                        .currency(o.getCurrency()),
-                                Collectors.toList())))
-                .entrySet().stream()
-                .map(entry -> new ShopAmountResult()
-                        .id(entry.getKey())
-                        .amountResults(entry.getValue()))
-                .collect(Collectors.toList());
-        return new InlineResponse2007()
-                .result(shopAmountResults);
+        try {
+            var currentShopBalances = analyticsClient.getCurrentShopBalances(merchantFilter);
+            var shopAmountResults = currentShopBalances.getGroupsAmount().stream()
+                    .collect(Collectors.groupingBy(
+                            ShopGroupedAmount::getShopId,
+                            Collectors.mapping(
+                                    o -> new AmountResult()
+                                            .amount(o.getAmount())
+                                            .currency(o.getCurrency()),
+                                    Collectors.toList())))
+                    .entrySet().stream()
+                    .map(entry -> new ShopAmountResult()
+                            .id(entry.getKey())
+                            .amountResults(entry.getValue()))
+                    .collect(Collectors.toList());
+            return new InlineResponse2007()
+                    .result(shopAmountResults);
+        } catch (TException e) {
+            throw new AnalytycsException("Error while call analyticsClient.getCurrentShopBalances", e);
+        }
     }
 
     private SubError getSubError(com.rbkmoney.damsel.analytics.SubError o) {
