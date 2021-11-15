@@ -37,7 +37,7 @@ public class SearchApiDelegateService implements SearchApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "searchInvoices",
+                "SearchInvoices",
                 partyID,
                 merge(shopID, shopIDs),
                 paymentInstitutionRealm);
@@ -60,11 +60,11 @@ public class SearchApiDelegateService implements SearchApiDelegate {
     }
 
     @Override
-    public ResponseEntity<InlineResponse2009> searchPayments(String xRequestID, String partyID, OffsetDateTime fromTime, OffsetDateTime toTime, Integer limit, String xRequestDeadline, String shopID, List<String> shopIDs, List<String> excludeShopIDs, String paymentInstitutionRealm, String invoiceID, List<String> invoiceIDs, String paymentID, String paymentStatus, String paymentFlow, String paymentMethod, String paymentTerminalProvider, String payerEmail, String payerIP, String payerFingerprint, String customerID, String first6, String last4, String rrn, String approvalCode, String bankCardTokenProvider, String bankCardPaymentSystem, Long paymentAmountFrom, Long paymentAmountTo, String externalID, String continuationToken) {
+    public ResponseEntity<InlineResponse2009> searchPayments(String xRequestID, String partyID, OffsetDateTime fromTime, OffsetDateTime toTime, Integer limit, String xRequestDeadline, String shopID, List<String> shopIDs, List<String> excludeShopIDs, String paymentInstitutionRealm, String invoiceID, List<String> invoiceIDs, String paymentID, String paymentStatus, String paymentFlow, String paymentMethod, PaymentTerminalProvider paymentTerminalProvider, String payerEmail, String payerIP, String payerFingerprint, String customerID, String first6, String last4, String rrn, String approvalCode, BankCardTokenProvider bankCardTokenProvider, BankCardPaymentSystem bankCardPaymentSystem, Long paymentAmountFrom, Long paymentAmountTo, String externalID, String continuationToken) {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "searchPayments",
+                "SearchPayments",
                 partyID,
                 merge(shopID, shopIDs),
                 paymentInstitutionRealm);
@@ -105,7 +105,7 @@ public class SearchApiDelegateService implements SearchApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "searchRefunds",
+                "SearchRefunds",
                 partyID,
                 merge(shopID, shopIDs),
                 paymentInstitutionRealm);
@@ -132,7 +132,7 @@ public class SearchApiDelegateService implements SearchApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "searchChargebacks",
+                "SearchChargebacks",
                 partyID,
                 merge(shopID, shopIDs),
                 paymentInstitutionRealm);
@@ -159,7 +159,7 @@ public class SearchApiDelegateService implements SearchApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "searchPayouts",
+                "SearchPayouts",
                 partyID,
                 merge(shopID, shopIDs),
                 paymentInstitutionRealm);
@@ -181,7 +181,7 @@ public class SearchApiDelegateService implements SearchApiDelegate {
     public ResponseEntity<InlineResponse20013> searchInvoiceTemplates(String xRequestID, String partyID, OffsetDateTime fromTime, OffsetDateTime toTime, Integer limit, String xRequestDeadline, List<String> shopIDs, String paymentInstitutionRealm, String invoiceTemplateID, String invoiceTemplateStatus, String name, String product, OffsetDateTime invoiceValidUntil, String continuationToken) {
         log.info("-> Req: xRequestID={}", xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "searchInvoiceTemplates",
+                "SearchInvoiceTemplates",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);

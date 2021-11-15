@@ -32,7 +32,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getAveragePayment",
+                "GetAveragePayment",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -47,7 +47,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getCreditingsAmount",
+                "GetCreditingsAmount",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -62,7 +62,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getCurrentBalances",
+                "GetCurrentBalances",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -77,7 +77,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getCurrentShopBalances",
+                "GetCurrentShopBalances",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -92,7 +92,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsAmount",
+                "GetPaymentsAmount",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -107,7 +107,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsCount",
+                "GetPaymentsCount",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -122,7 +122,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsErrorDistribution",
+                "GetPaymentsErrorDistribution",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -137,7 +137,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsSplitAmount",
+                "GetPaymentsSplitAmount",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -157,7 +157,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsSplitCount",
+                "GetPaymentsSplitCount",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -177,7 +177,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsSubErrorDistribution",
+                "GetPaymentsSubErrorDistribution",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -192,7 +192,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getPaymentsToolDistribution",
+                "GetPaymentsToolDistribution",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
@@ -207,7 +207,7 @@ public class AnalyticsApiDelegateService implements AnalyticsApiDelegate {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
-                "getRefundsAmount",
+                "GetRefundsAmount",
                 partyID,
                 shopIDs,
                 paymentInstitutionRealm);
