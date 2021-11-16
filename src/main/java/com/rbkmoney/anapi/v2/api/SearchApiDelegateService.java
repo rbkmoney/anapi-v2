@@ -60,7 +60,7 @@ public class SearchApiDelegateService implements SearchApiDelegate {
     }
 
     @Override
-    public ResponseEntity<InlineResponse2009> searchPayments(String xRequestID, String partyID, OffsetDateTime fromTime, OffsetDateTime toTime, Integer limit, String xRequestDeadline, String shopID, List<String> shopIDs, List<String> excludeShopIDs, String paymentInstitutionRealm, String invoiceID, List<String> invoiceIDs, String paymentID, String paymentStatus, String paymentFlow, String paymentMethod, PaymentTerminalProvider paymentTerminalProvider, String payerEmail, String payerIP, String payerFingerprint, String customerID, String first6, String last4, String rrn, String approvalCode, BankCardTokenProvider bankCardTokenProvider, BankCardPaymentSystem bankCardPaymentSystem, Long paymentAmountFrom, Long paymentAmountTo, String externalID, String continuationToken) {
+    public ResponseEntity<InlineResponse2009> searchPayments(String xRequestID, String partyID, OffsetDateTime fromTime, OffsetDateTime toTime, Integer limit, String xRequestDeadline, String shopID, List<String> shopIDs, List<String> excludeShopIDs, String paymentInstitutionRealm, String invoiceID, List<String> invoiceIDs, String paymentID, String paymentStatus, String paymentFlow, String paymentMethod, String paymentTerminalProvider, String payerEmail, String payerIP, String payerFingerprint, String customerID, String first6, String last4, String rrn, String approvalCode, String bankCardTokenProvider, String bankCardPaymentSystem, Long paymentAmountFrom, Long paymentAmountTo, String externalID, String continuationToken) {
         log.info("-> Req: xRequestID={}", xRequestID);
         checkDeadline(xRequestDeadline, xRequestID);
         shopIDs = accessService.getAccessibleShops(
