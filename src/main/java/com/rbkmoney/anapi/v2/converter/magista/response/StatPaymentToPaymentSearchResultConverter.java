@@ -86,7 +86,8 @@ public class StatPaymentToPaymentSearchResultConverter {
                             .clientInfo(resource.getResource().isSetClientInfo()
                                     ? new ClientInfo()
                                     .fingerprint(clientInfo.getFingerprint())
-                                    .ip(clientInfo.getIpAddress()) : null)
+                                    .ip(clientInfo.getIpAddress())
+                                    : null)
                             .contactInfo(new ContactInfo()
                                     .email(contactInfo.getEmail())
                                     .phoneNumber(contactInfo.getPhoneNumber()));
@@ -130,18 +131,20 @@ public class StatPaymentToPaymentSearchResultConverter {
                 return new PaymentToolDetailsBankCard()
                         .bin(card.getBin())
                         .paymentSystem(card.isSetPaymentSystemDeprecated()
-                                ? BankCardPaymentSystem.fromValue(card.getPaymentSystemDeprecated().name()) : null)
+                                ? BankCardPaymentSystem.fromValue(card.getPaymentSystemDeprecated().name())
+                                : null)
                         .cardNumberMask(constructCardNumber(card))
                         .lastDigits(card.getLastDigits())
                         .tokenProvider(card.isSetTokenProviderDeprecated()
-                                ? BankCardTokenProvider.fromValue(card.getTokenProviderDeprecated().name()) : null);
+                                ? BankCardTokenProvider.fromValue(card.getTokenProviderDeprecated().name())
+                                : null);
             }
             case PAYMENT_TERMINAL -> {
                 var terminal = paymentTool.getPaymentTerminal();
                 return new PaymentToolDetailsPaymentTerminal()
                         .provider(terminal.isSetTerminalTypeDeprecated()
-                                ? PaymentTerminalProvider.fromValue(terminal.getTerminalTypeDeprecated().name()) :
-                                null);
+                                ? PaymentTerminalProvider.fromValue(terminal.getTerminalTypeDeprecated().name())
+                                : null);
             }
             case MOBILE_COMMERCE -> {
                 var mobile = paymentTool.getMobileCommerce();
